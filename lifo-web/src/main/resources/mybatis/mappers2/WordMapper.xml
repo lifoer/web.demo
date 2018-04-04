@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lifo.mapper2.WordMapper">
+	<cache type="lifo.cache.RedisCache"/>
+	
+	<select id="queryWord" resultType="Map">
+		select count value,word name from wordcount
+		<where>
+			<if test="savedate != null">
+				savedate=#{savedate}
+			</if>
+		</where>
+		order by value desc limit 30
+	</select>
+</mapper>

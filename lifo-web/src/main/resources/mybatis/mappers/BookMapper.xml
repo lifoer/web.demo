@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lifo.mapper.BookMapper">
+	<cache type="lifo.cache.RedisCache"/>
+
+	<select id="findAllBook" resultType="Book">
+		SELECT * FROM book
+	</select>
+	
+	<select id="findSale" resultType="Book">
+		SELECT * FROM book ORDER BY COMMENT DESC
+	</select>
+	
+	<select id="queryBook" resultType="Book">
+		select * from book
+		<where>
+			<if test="true">
+				name like '%${name}%'
+			</if>
+			<if test="true">
+				or des like '%${des}%' 
+			</if>
+		</where>
+	</select>
+	
+	<select id="querySale" resultType="Book">
+		select * from book
+		<where>
+			<if test="true">
+				name like '%${name}%'
+			</if>
+			<if test="true">
+				or des like '%${des}%'
+			</if>
+		</where>
+		ORDER BY COMMENT DESC
+	</select>
+</mapper>
