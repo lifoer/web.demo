@@ -181,9 +181,11 @@
                         if(i<8) {
                             option_col.xAxis[0].data.push(result[i].name);
                             option_col.series[0].data.push(result[i].value);
-                            option_round.series[0].data.push(result[i]);
-                            option_round.legend.data.push(result[i].name);   
-                        }                       
+                        }
+                        if(i<6) {
+                        	 option_round.series[0].data.push(result[i]);
+                             option_round.legend.data.push(result[i].name);   
+                        }
                     }
                     chart_char.setOption(option_char);   
                     chart_col.setOption(option_col);
