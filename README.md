@@ -2,9 +2,9 @@
 
 #### 1.基本功能展示：
 
-![1](1.jpg)
+![1](https://github.com/lifoer/web.demo/blob/master/README/1.jpg?raw=true)
 
-![2](2.jpg)
+![2](https://github.com/lifoer/web.demo/blob/master/README/2.jpg?raw=true)
 
 #### 2.所用知识（按所用知识先后顺序和所占比重）
 | 所需知识 | 所需星级 |
