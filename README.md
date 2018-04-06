@@ -28,4 +28,4 @@
 | shell脚本编写 | ★★ |
 |echarts可视化展示| ★★ |
 ### 4.详细设计与思路
-~~[SSM框架Demo之lifo搜索词频分析](https://lifoer.github.io)~~
+[SSM框架Demo之lifo搜索词频分析](https://lifoer.github.io/2018/04/07/SSM框架Demo之lifo搜索词频分析/)
