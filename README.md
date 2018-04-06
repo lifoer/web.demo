@@ -27,5 +27,5 @@
 | sqoop数据导出工具 | ★ |
 | shell脚本编写 | ★★ |
 |echarts可视化展示| ★★ |
-### 4.详细设计（暂未更新）
-~~[github博客](https://lifoer.github.io)~~
+### 4.详细设计与思路
+~~[SSM框架Demo之lifo搜索词频分析](https://lifoer.github.io)~~
