@@ -21,16 +21,17 @@ import org.apache.log4j.Logger;
 public class FeignRequest {
 	
 	public static void main(String[] args) {
-		String url = "http://lifo.com/index";
+		String url = "http://lifo.com/index.html";
 		for(int i = 0; i < 10000; i++) {
 			doPost(url,randomListToMap());
 		}
+		System.out.println("end");
 	}
 	
 	public static Map<Object, Object> randomListToMap() {
 		Map<Object,Object> map = new HashMap<Object, Object>();
-		String[] str = {"java","´óÊı¾İ","cÓïÑÔ","hadoop","Êı¾İ½á¹¹","Ëã·¨","ÈË¹¤ÖÇÄÜ","»úÆ÷Ñ§Ï°",
-				"ÅÀ³æ","python","Éî¶ÈÑ§Ï°","ps","word","excel","ppt","ÍøÂç°²È«","ÍøÂç±à³Ì","android","ios"};
+		String[] str = {"java","å¤§æ•°æ®","cè¯­è¨€","hadoop","æ•°æ®ç»“æ„","ç®—æ³•","äººå·¥æ™ºèƒ½","æœºå™¨å­¦ä¹ ",
+				"çˆ¬è™«","python","æ·±åº¦å­¦ä¹ ","ps","word","excel","ppt","ç½‘ç»œå®‰å…¨","ç½‘ç»œç¼–ç¨‹","android","ios"};
 		Random random = new Random();
 		int index = random.nextInt(str.length);
 		String value = str[index];

@@ -10,15 +10,15 @@ import lifo.service.BookService;
 @Controller
 public class StartSpider {
 		
-	private static BookService homeService;
+	private static BookService bookService;
 	
-	public BookService getHomeService() {
-		return homeService;
+	public BookService getBookService() {
+		return bookService;
 	}
 
 	@Autowired
-	public void setHomeService(BookService homeService) {
-		StartSpider.homeService = homeService;
+	public void setHomeService(BookService bookService) {
+		StartSpider.bookService = bookService;
 	}
 
 	public static void main(String[] args) {
@@ -28,8 +28,8 @@ public class StartSpider {
 	}
 	/**
 	 * 
-	 * @param keyword ËÑË÷¹Ø¼ü´Ê
-	 * @param RecordNum ËÑËØ×ÜÒ³Êı£¬Ã¿Ò³Õı³£60Ìõ
+	 * @param keyword æœç´¢å…³é”®è¯
+	 * @param RecordNum æœç´ æ€»é¡µæ•°ï¼Œæ¯é¡µæ­£å¸¸60æ¡
 	 */
 	private static void start(String keyword,int pageNum) {
 		//"http://search.dangdang.com/?key=java&act=input&show=big&page_index=2";
@@ -37,7 +37,7 @@ public class StartSpider {
 		String url = "";
 		for(int i = 1; i <= pageNum; i++) {
 			 url = "http://search.dangdang.com/?key="+  keyword + "&act=input&show=big&page_index=" + i;
-			 homeService.insertBook(url);
+			 bookService.insertBook(url);
 		}
 		System.out.println("end");
 	}

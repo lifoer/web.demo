@@ -22,10 +22,10 @@ import lifo.pojo.Book;
 public class BookService {
 
 	@Autowired
-	private BookMapper homeMapper;
+	private BookMapper bookMapper;
 	/**
-	 * jsoupÄ£ÄâÇëÇó£¬»ñÈ¡Êı¾İ´æµ½mysql
-	 * @param url ÅÀÈ¡Á´½Ó
+	 * jsoupæ¨¡æ‹Ÿè¯·æ±‚ï¼Œè·å–æ•°æ®å­˜åˆ°mysql
+	 * @param url çˆ¬å–é“¾æ¥
 	 */
 	public void insertBook(String url) {
 
@@ -39,16 +39,16 @@ public class BookService {
 			Document doc = connect.get();
 			for (int i = 0; i < 60; i++) {
 				try {
-					// ÊéÃû¡¢ÏêÇéÒ³
+					// ä¹¦åã€è¯¦æƒ…é¡µ
 					Element element1 = doc.select("#search_nature_rg ul li .name a").get(i);
 					String name = element1.attr("title").substring(1);
-					// ÊéµÄ¼Û¸ñ
+					// ä¹¦çš„ä»·æ ¼
 					Element element2 = doc.select("#search_nature_rg ul li .price .price_r").get(i);
 					Double price = Double.parseDouble(element2.text().substring(1));
-					// Êé¼ò½é
+					// ä¹¦ç®€ä»‹
 					Element element3 = doc.select("#search_nature_rg ul li .search_hot_word").get(i);
 					String des = element3.text();
-					// ÊéµÄÍ¼Æ¬Á´½Ó
+					// ä¹¦çš„å›¾ç‰‡é“¾æ¥
 					Element element4 = doc.select("#search_nature_rg ul li .pic img").get(i);
 					String img = "";
 					if (i <= 3) {
@@ -56,20 +56,20 @@ public class BookService {
 					} else {
 						img = element4.attr("data-original");
 					}
-					// ÏÂÔØÍ¼Æ¬µ½±¾µØ
+					// ä¸‹è½½å›¾ç‰‡åˆ°æœ¬åœ°
 					String dir = "d://lifo";
-					//uuidÉú³ÉÍ¼Æ¬Ãû³Æ
+					//uuidç”Ÿæˆå›¾ç‰‡åç§°
 					String imgName = UUID.randomUUID().toString() + img.substring(img.lastIndexOf("."));
 					imgDown(img, dir, imgName);
-					// ÉèÖÃÍ¼Æ¬µØÖ·Îª±¾µØÍ¼Æ¬·şÎñÆ÷µØÖ·
+					// è®¾ç½®å›¾ç‰‡åœ°å€ä¸ºæœ¬åœ°å›¾ç‰‡æœåŠ¡å™¨åœ°å€
 					img = "http://image.lifo.com/" + imgName;
-					// ÊéÆÀÂÛÊı
+					// ä¹¦è¯„è®ºæ•°
 					Element element5 = doc.select("#search_nature_rg ul li .star a").get(i);
-					Integer comment = Integer.parseInt(element5.text().split("Ìõ")[0]);
-					// ÉèÖÃnoÎªuuid
+					Integer comment = Integer.parseInt(element5.text().split("æ¡")[0]);
+					// è®¾ç½®noä¸ºuuid
 					String no = UUID.randomUUID().toString();
 					Book book = new Book(no, name, comment, price, img, des);
-					homeMapper.insertBook(book);
+					bookMapper.insertBook(book);
 				} catch (Exception e) {
 					System.out.println((i + "\n" + e.getMessage()));
 					continue;
@@ -80,28 +80,28 @@ public class BookService {
 		}
 	}
 	/**
-	 * ÏÂÔØÍ¼Æ¬·½·¨
-	 * @param img Í¼Æ¬µØÖ·
-	 * @param dir Í¼Æ¬´æ·ÅÂ·¾¶
-	 * @param imgName Í¼Æ¬Ãû³Æ
+	 * ä¸‹è½½å›¾ç‰‡æ–¹æ³•
+	 * @param img å›¾ç‰‡åœ°å€
+	 * @param dir å›¾ç‰‡å­˜æ”¾è·¯å¾„
+	 * @param imgName å›¾ç‰‡åç§°
 	 */
 	private void imgDown(String img, String dir, String imgName) {
 		InputStream inputStream = null;
 		FileOutputStream fileOutputStream = null;
 		try {
-			// ½¨Á¢Á¬½Ó,»ñµÃÊäÈëÁ÷
+			// å»ºç«‹è¿æ¥,è·å¾—è¾“å…¥æµ
 			URL url = new URL(img);
 			URLConnection connect = url.openConnection();
 			connect.setConnectTimeout(1000);
 			connect.setReadTimeout(5000);
 			connect.connect();
 			inputStream = connect.getInputStream();
-			// ÈôÎÄ¼ş¼Ğ²»´æÔÚ´´½¨ÎÄ¼ş¼Ğ
+			// è‹¥æ–‡ä»¶å¤¹ä¸å­˜åœ¨åˆ›å»ºæ–‡ä»¶å¤¹
 			File file = new File(dir);
 			if (!file.exists()) {
 				file.mkdir();
 			}
-			// ´´½¨Êä³öÁ÷
+			// åˆ›å»ºè¾“å‡ºæµ
 			String filename = dir + "/" + imgName;
 			fileOutputStream = new FileOutputStream(new File(filename));
 			byte[] buffer = new byte[102400];
